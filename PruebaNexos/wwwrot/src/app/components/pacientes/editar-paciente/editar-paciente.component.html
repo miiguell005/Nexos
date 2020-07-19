@@ -1,0 +1,129 @@
+<div class="col-md-12">
+  <div class="col-md-12">
+    <a class="btn btn-primary btn-sm" [routerLink]="['/paciente']" routerLinkActive="active">
+      <i class="fa fa-reply" aria-hidden="true"></i>
+      Átras
+    </a>
+  </div>
+  <div class="row">
+    <div class="col-md-12 text-center">
+      <h2>{{titulo}}</h2>
+      <br>
+    </div>
+  </div>
+  <div class="row">
+
+    <div class="col-md-12">
+      <div class="row">
+        <div class="col-2">
+          <label for="nombre">Nombre* </label>
+        </div>
+        <div class="col-10">
+          <input class="form-control" type="text" [(ngModel)]="paciente.nombre" placeholder="Nombre del paciente"
+            id="id-nombre">
+          <span class="mensaje-error" *ngIf="botonGuardarOprimido && !paciente.nombre">
+            El nombre es requerido
+          </span>
+        </div>
+      </div>
+    </div>
+
+    <div class="col-md-12">
+      <div class="row">
+        <div class="col-2">
+          <label for="apellido">Apellido* </label>
+        </div>
+        <div class="col-10">
+          <input class="form-control" type="text" [(ngModel)]="paciente.apellido" placeholder="Apellido del paciente"
+            id="id-apellido">
+          <span class="mensaje-error" *ngIf="botonGuardarOprimido && !paciente.apellido">
+            El apellido es requerido
+          </span>
+        </div>
+      </div>
+    </div>
+
+    <div class="col-md-12">
+      <div class="row">
+        <div class="col-2">
+          <label for="numSeguroSocial">Número de seguro social* </label>
+        </div>
+        <div class="col-10">
+          <input class="form-control" type="text" [(ngModel)]="paciente.numSeguroSocial"
+            placeholder="Número de seguro social del paciente" id="id-numSeguroSocial">
+          <span class="mensaje-error" *ngIf="botonGuardarOprimido && !paciente.numSeguroSocial">
+            El número de seguro social es requerido
+          </span>
+        </div>
+      </div>
+    </div>
+
+    <div class="col-md-12">
+      <div class="row">
+        <div class="col-2">
+          <label for="codigoPostal">Código postal* </label>
+        </div>
+        <div class="col-10">
+          <input class="form-control" type="text" [(ngModel)]="paciente.codigoPostal"
+            placeholder="Código postal del paciente" id="id-codigoPostal">
+          <span class="mensaje-error" *ngIf="botonGuardarOprimido && !paciente.codigoPostal">
+            El Código postal es requerida
+          </span>
+        </div>
+      </div>
+    </div>
+
+    <div class="col-md-12">
+      <div class="row">
+        <div class="col-2">
+          <label for="telefono">Teléfono* </label>
+        </div>
+        <div class="col-10">
+          <input class="form-control" type="text" [(ngModel)]="paciente.telefono" placeholder="Teléfono del paciente"
+            id="id-telefono">
+          <span class="mensaje-error" *ngIf="botonGuardarOprimido && !paciente.telefono">
+            El télefono es requerida
+          </span>
+        </div>
+      </div>      
+      <br>
+    </div>
+
+    <div class="col-md-12" *ngFor="let a of paciente.atencion">
+      <div *ngIf="a.eliminado != true">
+        <div class="card">
+          <div class="card-body">
+            <div class="row">
+              <div class="col-11">
+                Seleccione el doctor
+              </div>
+              <div class="col-1 text-right">
+                <button class="btn btn-sm btn-primary" (click)="eliminarDoctor(a)">
+                  <i class="fa fa-trash-o" aria-hidden="true"></i>
+                </button>
+              </div>
+              <div class="col-12">
+                <select class="form-control" [(ngModel)]="a.idDoctor" name="nidHospital">
+                  <option *ngFor="let d of doctores" [(ngValue)]="d.idDoctor">{{ d.apellido }} {{ d.nombre }}</option>
+                </select>
+                <span class="mensaje-error" *ngIf="botonGuardarOprimido && !a.idDoctor">
+                  Es necesario seleccionar el doctor
+                </span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="col-md-12">
+      <button class="btn btn-sm btn-primary btn-block" (click)="agregarDoctor()">Agregar Doctor</button>
+    </div>
+
+    <div class="col-md-12 text-center">
+      <br>
+      <button class="btn btn-primary btn-sm" (click)="guardar()">Guardar</button>
+    </div>
+
+  </div>
+</div>

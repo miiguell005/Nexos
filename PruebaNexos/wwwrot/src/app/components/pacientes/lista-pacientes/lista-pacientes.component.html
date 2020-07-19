@@ -1,0 +1,68 @@
+<div class="col-md-12">
+  <div class="row">
+    <div class="col-md-12 text-center">
+      <h2>{{titulo}}</h2>
+    </div>
+  </div>
+  <div class="col-md-12">
+    <br>
+    <a class="btn btn-primary btn-sm" [routerLink]="['/paciente/0']" routerLinkActive="active">Crear paciente</a>
+    <a class="btn btn-primary btn-sm" [routerLink]="['/doctor/crear']" routerLinkActive="active">Crear doctor</a>
+    <br>
+  </div>
+  <div class="row">
+    <div class="col-md-12 ">
+      <div class="table-responsive-sm">
+        <table class="table table-bordered table-hover table-sm">
+          <thead>
+            <tr>
+              <th></th>
+              <th>Id</th>
+              <th>Nombre</th>
+              <th>Teléfono</th>
+              <th>Doctores</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let p of pacientes">
+              <td>
+                <a class="btn btn-primary btn-sm" [routerLink]="['/paciente/detalle', p.idPaciente]" routerLinkActive="active">
+                  <i class="fa fa-eye" style="color:aliceblue;" aria-hidden="true"></i>
+                </a>&nbsp;
+                <a class="btn btn-primary btn-sm" [routerLink]="['/paciente', p.idPaciente]" routerLinkActive="active">
+                  <i class="fa fa-pencil" aria-hidden="true"></i>
+                </a>&nbsp;
+                <a class="btn btn-primary btn-sm" (click)="eliminarPaciente(p)" routerLinkActive="active">
+                  <i class="fa fa-trash-o" style="color:aliceblue;" aria-hidden="true"></i>
+                </a>                
+              </td>
+              <td>{{p.idPaciente}}</td>
+              <td>{{p.apellido}} {{p.nombre}}</td>
+              <td>{{p.telefono}}</td>
+              <td>
+                <b *ngIf="!p.atencion.length">
+                  Sin registro de doctores
+                </b>
+                <div *ngIf="p.atencion.length">
+                  <table class="table table-bordered table-hover table-sm">
+                    <tbody>
+                      <tr class="table-secondary">
+                        <td>Nombres</td>
+                        <td>Especialidad</td>
+                      </tr>
+                      <tr *ngFor="let a of p.atencion">
+                        <td>{{a.doctor.apellido}} {{a.doctor.nombre}}</td>
+                        <td>{{a.doctor.especialidad}}</td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+  <app-modal-confirmacion></app-modal-confirmacion>
+</div>
