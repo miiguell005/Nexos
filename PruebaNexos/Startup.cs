@@ -38,7 +38,11 @@ namespace PruebaNexos
             services.AddSingleton<ILog, Log>();
 
             services.AddCors();
-            services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
+            services.AddMvc().AddJsonOptions(
+                options => options.SerializerSettings.ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore)
+            .SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
+            
+            //services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
             //    .AddJsonOptions(opt =>
             //{
             //    opt.SerializerSettings.PreserveReferencesHandling = PreserveReferencesHandling.Objects;
